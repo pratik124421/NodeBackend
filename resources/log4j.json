@@ -1,0 +1,29 @@
+{
+    "appenders": {
+        "fileAppender": {
+            "type": "file",
+            "filename": "cdd-platform.log",
+            "maxLogSize": 10000000,
+            "backups": 20,
+            "layout": {
+                "type": "pattern",
+                "pattern": "[%d{yyyy-MM-dd hh.mm.ss}] [%z] [%f{3}] [%l] [%p] : %m"
+            }
+        },
+        "out": {
+            "type": "stdout",
+            "layout": {
+                "type": "pattern",
+                "pattern": "%[[%d{yyyy-MM-dd hh.mm.ss}] [%z] [%f{3}] [%l] [%p]%] : %m"
+            }
+        }
+    },
+
+    "categories": {
+        "default": {
+            "appenders": ["out", "fileAppender"],
+            "level": "debug",
+            "enableCallStack": true
+        }
+    }
+}
