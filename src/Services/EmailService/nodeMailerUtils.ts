@@ -11,6 +11,11 @@ export class NodeMailer {
     try {
       // details about transpoter....
       // https://nodemailer.com/smtp/
+      console.log(
+        "came here...",
+        EnvironmentConfig.getInstance().UserEmail,
+        EnvironmentConfig.getInstance().UserEmailPassword
+      );
       NodeMailer.transport = nodemailer.createTransport({
         host: "smtp.gmail.com",
         port: 587,

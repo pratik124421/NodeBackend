@@ -42,8 +42,26 @@ export class SendMail {
       EnvironmentConfig.getInstance().UserEmail,
       mailOption
     );
-    const transport = await NodeMailer.getTransporter();
-    return await transport.sendMail(mailOption, 20);
+    const transporter = await NodeMailer.getTransporter();
+
+    const response = await this.SendMailToRecipient(transporter, mailOption);
+    // const response = transport.sendMail(mailOption, 20);
+
+    return response;
+  }
+
+  public async SendMailToRecipient(transporter, mailOption) {
+    return new Promise((resolve, reject) => {
+      transporter.sendMail(mailOption, function (error, info) {
+        if (error) {
+          console.log("error is " + error);
+          resolve({ status: "something went wrong" }); // or use rejcet(false) but then you will have to handle errors
+        } else {
+          console.log("Email sent: " + info.response);
+          resolve({ status: "Mail sent successfully" });
+        }
+      });
+    });
   }
 
   public async getMailOptions(
